@@ -11,6 +11,7 @@
         <module name="02_BeanLifeCycle" />
         <module name="03_DependancyInjection" />
         <module name="05_Configurations" />
+        <module name="06_Runtime_Value_Injection" />
       </profile>
     </annotationProcessing>
   </component>
