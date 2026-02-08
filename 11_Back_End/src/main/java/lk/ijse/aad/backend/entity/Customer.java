@@ -1,6 +1,5 @@
 package lk.ijse.aad.backend.entity;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -21,7 +20,7 @@ public class Customer {
 
     @Id
     private String cId;
-
     private String cName;
     private String cAddress;
+    private String cPhone; // Added missing phone field
 }

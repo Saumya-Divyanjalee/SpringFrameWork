@@ -2,9 +2,12 @@ package lk.ijse.aad.backend.service;
 
 import lk.ijse.aad.backend.dto.CustomerDTO;
 
+import java.util.List;
+
 public interface CustomerService {
-    public void saveCustomer(CustomerDTO customerDTO);
-    void updateCustomer(CustomerDTO customerDTO);
-    void deleteCustomer(String customerId);
-    CustomerDTO getCustomer();
+    void saveCustomer(CustomerDTO customerDTO);
+    List<CustomerDTO> getAllCustomers();
+    CustomerDTO getCustomerById(String id);
+    void updateCustomer(String id, CustomerDTO customerDTO);
+    void deleteCustomer(String id);
 }
