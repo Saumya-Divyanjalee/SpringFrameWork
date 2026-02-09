@@ -3,7 +3,7 @@ package lk.ijse.aad.backend.service.impl;
 import lk.ijse.aad.backend.dto.CustomerDTO;
 import lk.ijse.aad.backend.repository.CustomerRepository;
 import lk.ijse.aad.backend.entity.Customer;
-import lk.ijse.aad.backend.service.CustomerService;
+import lk.ijse.aad.backend.service.custom.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

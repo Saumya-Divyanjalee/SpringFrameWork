@@ -1,7 +1,7 @@
 package lk.ijse.aad.backend.controller;
 
 import lk.ijse.aad.backend.dto.CustomerDTO;
-import lk.ijse.aad.backend.service.CustomerService;
+import lk.ijse.aad.backend.service.custom.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

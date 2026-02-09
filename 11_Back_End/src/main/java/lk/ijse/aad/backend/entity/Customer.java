@@ -22,5 +22,5 @@ public class Customer {
     private String cId;
     private String cName;
     private String cAddress;
-    private String cPhone; // Added missing phone field
+    private String cPhone;
 }

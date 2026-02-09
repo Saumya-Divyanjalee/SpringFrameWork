@@ -1,4 +1,4 @@
-package lk.ijse.aad.backend.service;
+package lk.ijse.aad.backend.service.custom;
 
 import lk.ijse.aad.backend.dto.CustomerDTO;
 
