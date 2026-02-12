@@ -3,7 +3,7 @@ package lk.ijse.aad.backend.dto;
 
 public class CustomerDTO {
 
-    private String cId;
+    private int cId;
     private String cName;
     private String cAddress;
     private String cPhone;
@@ -13,7 +13,7 @@ public class CustomerDTO {
     }
 
 
-    public CustomerDTO(String cId, String cName, String cAddress, String cPhone) {
+    public CustomerDTO(int cId, String cName, String cAddress, String cPhone) {
         this.cId = cId;
         this.cName = cName;
         this.cAddress = cAddress;
@@ -21,11 +21,11 @@ public class CustomerDTO {
     }
 
 
-    public String getCId() {
+    public int getCId() {
         return cId;
     }
 
-    public void setCId(String cId) {
+    public void setCId(int cId) {
         this.cId = cId;
     }
 

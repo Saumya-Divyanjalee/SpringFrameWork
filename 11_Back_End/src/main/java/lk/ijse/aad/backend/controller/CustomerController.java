@@ -2,7 +2,9 @@ package lk.ijse.aad.backend.controller;
 
 import lk.ijse.aad.backend.dto.CustomerDTO;
 import lk.ijse.aad.backend.service.custom.CustomerService;
+import lk.ijse.aad.backend.util.APIResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +20,15 @@ public class CustomerController {
 
     // POST endpoint to save customer
     @PostMapping
-    public ResponseEntity<String> saveCustomer(@RequestBody CustomerDTO customerDTO) {
+    public ResponseEntity<APIResponse<String>> saveCustomer(@RequestBody CustomerDTO customerDTO) {
+         
         customerService.saveCustomer(customerDTO);
-        return ResponseEntity.ok("Customer saved successfully");
+        return new ResponseEntity<>(
+                new APIResponse<>(201, "Customer saved", null),
+                HttpStatus.CREATED
+        );
+//        return ResponseEntity.ok("Customer saved successfully");
+
     }
 
     // GET endpoint to retrieve all customers

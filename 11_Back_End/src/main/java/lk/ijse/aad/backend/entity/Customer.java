@@ -1,8 +1,6 @@
 package lk.ijse.aad.backend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +17,8 @@ import lombok.ToString;
 public class Customer {
 
     @Id
-    private String cId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int cId;
     private String cName;
     private String cAddress;
     private String cPhone;

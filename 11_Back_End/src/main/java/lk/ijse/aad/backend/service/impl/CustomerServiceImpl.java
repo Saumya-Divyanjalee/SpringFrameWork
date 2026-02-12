@@ -1,6 +1,7 @@
 package lk.ijse.aad.backend.service.impl;
 
 import lk.ijse.aad.backend.dto.CustomerDTO;
+import lk.ijse.aad.backend.exception.CustomException;
 import lk.ijse.aad.backend.repository.CustomerRepository;
 import lk.ijse.aad.backend.entity.Customer;
 import lk.ijse.aad.backend.service.custom.CustomerService;
@@ -18,12 +19,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void saveCustomer(CustomerDTO customerDTO) {
-        customerRepository.save(
-                new Customer(
-                        customerDTO.getCId(),
-                        customerDTO.getCName(),
-                        customerDTO.getCAddress(),
-                        customerDTO.getCPhone()));
+    throw new CustomException("Customer's data format issue");
+//        customerRepository.save(
+//                new Customer(
+//                        customerDTO.getCId(),
+//                        customerDTO.getCName(),
+//                        customerDTO.getCAddress(),
+//                        customerDTO.getCPhone()));
     }
 
     @Override
