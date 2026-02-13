@@ -7,19 +7,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@Entity
 @Table(name = "customer")
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
-@Entity
 public class Customer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cId;
+    @Column(name = "c_id")
+    private Integer cId;
+
+    @Column(name = "c_name")
     private String cName;
+
+    @Column(name = "c_address")
     private String cAddress;
+
+    @Column(name = "c_phone")
     private String cPhone;
 }

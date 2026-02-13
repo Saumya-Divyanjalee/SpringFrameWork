@@ -1,65 +1,28 @@
 package lk.ijse.aad.backend.dto;
 
 
+import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+
+import jakarta.validation.constraints.*;
+import lombok.*;
+
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class CustomerDTO {
 
-    private int cId;
+//    @NotNull(message = "Customer ID is required")
+    private Integer cId;
+
+    @NotBlank(message = "Customer name is mandatory")
     private String cName;
+
+    @NotBlank(message = "Address is mandatory")
+    @Size(min = 10, message = "Address must be at least 10 chars")
     private String cAddress;
+
     private String cPhone;
-
-
-    public CustomerDTO() {
-    }
-
-
-    public CustomerDTO(int cId, String cName, String cAddress, String cPhone) {
-        this.cId = cId;
-        this.cName = cName;
-        this.cAddress = cAddress;
-        this.cPhone = cPhone;
-    }
-
-
-    public int getCId() {
-        return cId;
-    }
-
-    public void setCId(int cId) {
-        this.cId = cId;
-    }
-
-    public String getCName() {
-        return cName;
-    }
-
-    public void setCName(String cName) {
-        this.cName = cName;
-    }
-
-    public String getCAddress() {
-        return cAddress;
-    }
-
-    public void setCAddress(String cAddress) {
-        this.cAddress = cAddress;
-    }
-
-    public String getCPhone() {
-        return cPhone;
-    }
-
-    public void setCPhone(String cPhone) {
-        this.cPhone = cPhone;
-    }
-
-    @Override
-    public String toString() {
-        return "CustomerDTO{" +
-                "cId='" + cId + '\'' +
-                ", cName='" + cName + '\'' +
-                ", cAddress='" + cAddress + '\'' +
-                ", cPhone='" + cPhone + '\'' +
-                '}';
-    }
 }

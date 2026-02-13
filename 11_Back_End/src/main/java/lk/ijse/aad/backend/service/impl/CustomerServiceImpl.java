@@ -1,11 +1,11 @@
 package lk.ijse.aad.backend.service.impl;
 
 import lk.ijse.aad.backend.dto.CustomerDTO;
-import lk.ijse.aad.backend.exception.CustomException;
-import lk.ijse.aad.backend.repository.CustomerRepository;
 import lk.ijse.aad.backend.entity.Customer;
+import lk.ijse.aad.backend.repository.CustomerRepository;
 import lk.ijse.aad.backend.service.custom.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,55 +16,38 @@ import java.util.stream.Collectors;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     public void saveCustomer(CustomerDTO customerDTO) {
-    throw new CustomException("Customer's data format issue");
-//        customerRepository.save(
-//                new Customer(
-//                        customerDTO.getCId(),
-//                        customerDTO.getCName(),
-//                        customerDTO.getCAddress(),
-//                        customerDTO.getCPhone()));
+        customerRepository.save(modelMapper.map(customerDTO, Customer.class));
     }
 
     @Override
     public List<CustomerDTO> getAllCustomers() {
         return customerRepository.findAll().stream()
-                .map(customer -> new CustomerDTO(
-                        customer.getCId(),
-                        customer.getCName(),
-                        customer.getCAddress(),
-                        customer.getCPhone()))
+                .map(customer -> modelMapper.map(customer, CustomerDTO.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public CustomerDTO getCustomerById(String id) {
+    public CustomerDTO getCustomerById(int id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
-        return new CustomerDTO(
-                customer.getCId(),
-                customer.getCName(),
-                customer.getCAddress(),
-                customer.getCPhone());
+        return modelMapper.map(customer, CustomerDTO.class);
     }
 
     @Override
-    public void updateCustomer(String id, CustomerDTO customerDTO) {
+    public void updateCustomer(int id, CustomerDTO customerDTO) {
         if (!customerRepository.existsById(id)) {
             throw new RuntimeException("Customer not found with id: " + id);
         }
-        customerRepository.save(
-                new Customer(
-                        customerDTO.getCId(),
-                        customerDTO.getCName(),
-                        customerDTO.getCAddress(),
-                        customerDTO.getCPhone()));
+        customerDTO.setCId(id);
+        customerRepository.save(modelMapper.map(customerDTO, Customer.class));
     }
 
     @Override
-    public void deleteCustomer(String id) {
+    public void deleteCustomer(int id) {
         if (!customerRepository.existsById(id)) {
             throw new RuntimeException("Customer not found with id: " + id);
         }

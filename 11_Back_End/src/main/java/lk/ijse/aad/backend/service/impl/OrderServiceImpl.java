@@ -28,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
     public void saveOrder(OrderDTO orderDTO) {
 
         // Step 1: Validate customer exists
-        if (!customerRepository.existsById(orderDTO.getCustomerId())) {
+        if (!customerRepository.existsById(Integer.valueOf(orderDTO.getCustomerId()))) {
             throw new RuntimeException("Customer not found: " + orderDTO.getCustomerId());
         }
 

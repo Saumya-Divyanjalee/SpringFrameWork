@@ -23,15 +23,15 @@ public class GlobalExceptionHandler {
 
     }
 
-@ExceptionHandler
-    public ResponseEntity<APIResponse<String>> handleNullPointerException(Exception e){
-        return new ResponseEntity<>(new APIResponse<>(
-                HttpStatus.BAD_REQUEST.value(),
-                "Null Values are not allowed",
-                e.getMessage()
-        ),HttpStatus.BAD_REQUEST);
-
-}
+//@ExceptionHandler
+//    public ResponseEntity<APIResponse<String>> handleNullPointerException(Exception e){
+//        return new ResponseEntity<>(new APIResponse<>(
+//                HttpStatus.BAD_REQUEST.value(),
+//                "Null Values are not allowed",
+//                e.getMessage()
+//        ),HttpStatus.BAD_REQUEST);
+//
+//}
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<APIResponse<Map<String,String>>> handleValidationException(MethodArgumentNotValidException e){
