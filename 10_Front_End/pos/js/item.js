@@ -1,7 +1,5 @@
 // Function to save item
 function saveItem() {
-    // Get values from form
-    let itemId = $('#itemId').val();
     let itemName = $('#itemName').val();
     let itemPrice = parseFloat($('#itemPrice').val());
     let itemQuantity = parseInt($('#itemQuantity').val());
@@ -9,12 +7,11 @@ function saveItem() {
     let itemDescription = $('#itemDescription').val();
 
     // Validation
-    if (!itemId || !itemName || !itemPrice || !itemQuantity) {
+    if (!itemName || !itemPrice || !itemQuantity) {
         alert("Please fill in all required fields!");
         return;
     }
 
-    // Validate price and quantity are positive numbers
     if (itemPrice <= 0) {
         alert("Item price must be greater than 0!");
         return;
@@ -25,14 +22,11 @@ function saveItem() {
         return;
     }
 
-    console.log("Saving item:", itemId, itemName, itemPrice, itemQuantity);
-
     $.ajax({
         url: "http://localhost:8080/api/v1/item",
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify({
-            "itemId": itemId,
             "itemName": itemName,
             "itemPrice": itemPrice,
             "itemQuantity": itemQuantity,
@@ -41,15 +35,17 @@ function saveItem() {
         }),
         success: function(response) {
             console.log("Item saved successfully!");
-            alert("Item Saved!");
-            // Clear form
-            $('#itemForm')[0].reset();
-            // Reload item list
+            alert("Item Saved Successfully!");
+            clearForm();
             loadItems();
         },
         error: function(xhr, status, error) {
             console.error(xhr.responseText);
-            alert("Error saving item: " + xhr.responseText);
+            let errorMsg = "Error saving item!";
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+                errorMsg = xhr.responseJSON.message;
+            }
+            alert(errorMsg);
         }
     });
 }
@@ -64,7 +60,12 @@ function updateItem() {
     let itemDescription = $('#itemDescription').val();
 
     // Validation
-    if (!itemId || !itemName || !itemPrice || !itemQuantity) {
+    if (!itemId) {
+        alert("Please select an item to update!");
+        return;
+    }
+
+    if (!itemName || !itemPrice || !itemQuantity) {
         alert("Please fill in all required fields!");
         return;
     }
@@ -84,7 +85,6 @@ function updateItem() {
         method: "PUT",
         contentType: "application/json",
         data: JSON.stringify({
-            "itemId": itemId,
             "itemName": itemName,
             "itemPrice": itemPrice,
             "itemQuantity": itemQuantity,
@@ -92,13 +92,17 @@ function updateItem() {
             "itemDescription": itemDescription
         }),
         success: function(response) {
-            alert("Item Updated!");
-            $('#itemForm')[0].reset();
+            alert("Item Updated Successfully!");
+            clearForm();
             loadItems();
         },
         error: function(xhr, status, error) {
             console.error(xhr.responseText);
-            alert("Error updating item: " + xhr.responseText);
+            let errorMsg = "Error updating item!";
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+                errorMsg = xhr.responseJSON.message;
+            }
+            alert(errorMsg);
         }
     });
 }
@@ -108,7 +112,7 @@ function deleteItem() {
     let itemId = $('#itemId').val();
 
     if (!itemId) {
-        alert("Please enter Item ID to delete!");
+        alert("Please select an item to delete!");
         return;
     }
 
@@ -117,13 +121,17 @@ function deleteItem() {
             url: "http://localhost:8080/api/v1/item/" + itemId,
             method: "DELETE",
             success: function(response) {
-                alert("Item Deleted!");
-                $('#itemForm')[0].reset();
+                alert("Item Deleted Successfully!");
+                clearForm();
                 loadItems();
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);
-                alert("Error deleting item: " + xhr.responseText);
+                let errorMsg = "Error deleting item!";
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMsg = xhr.responseJSON.message;
+                }
+                alert(errorMsg);
             }
         });
     }
@@ -134,12 +142,15 @@ function loadItems() {
     $.ajax({
         url: "http://localhost:8080/api/v1/item",
         method: "GET",
-        success: function(items) {
+        success: function(response) {
             let tbody = $('#itemTableBody');
-            tbody.empty(); // Clear existing rows
+            tbody.empty();
+
+            // Handle APIResponse wrapper
+            let items = response.data || response;
 
             items.forEach(function(item) {
-                let row = `<tr onclick="populateForm('${item.itemId}', '${item.itemName}', ${item.itemPrice}, ${item.itemQuantity}, ${item.itemCost}, '${item.itemDescription || ''}')">
+                let row = `<tr onclick="populateForm(${item.itemId}, '${escapeHtml(item.itemName)}', ${item.itemPrice}, ${item.itemQuantity}, ${item.itemCost}, '${escapeHtml(item.itemDescription || '')}')">
                     <td>${item.itemId}</td>
                     <td>${item.itemName}</td>
                     <td>Rs. ${item.itemPrice.toFixed(2)}</td>
@@ -152,6 +163,7 @@ function loadItems() {
         },
         error: function(xhr, status, error) {
             console.error("Error loading items: " + xhr.responseText);
+            alert("Error loading items!");
         }
     });
 }
@@ -166,16 +178,25 @@ function populateForm(id, name, price, quantity, cost, description) {
     $('#itemDescription').val(description);
 }
 
+// Function to clear form
+function clearForm() {
+    $('#itemForm')[0].reset();
+    $('#itemId').val('');
+}
+
+// Utility function to escape HTML
+function escapeHtml(text) {
+    if (!text) return '';
+    return text.replace(/'/g, "\\'");
+}
+
 // Load items when page loads
 $(document).ready(function() {
     loadItems();
 
     // Add input validation for numeric fields
     $('#itemPrice, #itemCost').on('input', function() {
-        // Allow only numbers and decimal point
         this.value = this.value.replace(/[^0-9.]/g, '');
-
-        // Prevent multiple decimal points
         const parts = this.value.split('.');
         if (parts.length > 2) {
             this.value = parts[0] + '.' + parts.slice(1).join('');
@@ -183,7 +204,6 @@ $(document).ready(function() {
     });
 
     $('#itemQuantity').on('input', function() {
-        // Allow only integers
         this.value = this.value.replace(/[^0-9]/g, '');
     });
 });

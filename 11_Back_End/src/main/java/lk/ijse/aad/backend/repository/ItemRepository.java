@@ -5,12 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ItemRepository extends JpaRepository<Item, String> {
-    // Spring Data JPA automatically provides:
-    // - save(Item)
-    // - findAll()
-    // - findById(String)
-    // - deleteById(String)
-    // - existsById(String)
-    // And many more...
+public interface ItemRepository extends JpaRepository<Item, Integer> {
+    // Changed from String to Integer to match Item entity's ID type
 }

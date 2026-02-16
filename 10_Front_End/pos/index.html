@@ -2,38 +2,157 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>POS System</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS System — Modern Point of Sale</title>
     <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
+<!-- Animated Background -->
+<div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+    <div class="grid-overlay"></div>
+</div>
+
+<!-- Main Container -->
 <div class="container">
 
-    <h1>POS SYSTEM</h1>
-    <p class="subtitle">Point of Sale Management System</p>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <span class="logo-text">POS <span class="logo-accent">System</span></span>
+        </div>
+        <div class="header-time" id="currentTime">Loading...</div>
+    </header>
 
-    <div class="menu">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge">
+            <span class="badge-dot"></span>
+            <span>Modern Point of Sale</span>
+        </div>
+        <h1 class="hero-title">
+            Manage Your Business
+            <span class="gradient-text">Effortlessly</span>
+        </h1>
+        <p class="hero-subtitle">
+            Streamline operations with our intuitive POS system.
+            Track inventory, manage customers, and process orders all in one place.
+        </p>
+    </section>
 
-        <a href="pages/customer.html" class="card">
-            <h2>Customer</h2>
-            <p>Manage customer details</p>
+    <!-- Cards Grid -->
+    <div class="cards-grid">
+
+        <!-- Customer Card -->
+        <a href="pages/customer.html" class="card" data-card="1">
+            <div class="card-glow"></div>
+            <div class="card-icon customer-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">Customers</h2>
+                <p class="card-description">Manage customer profiles, contact details, and purchase history</p>
+                <div class="card-stats">
+                    <div class="stat">
+                        <span class="stat-icon">👥</span>
+                        <span class="stat-label">Database</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-arrow">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
         </a>
 
-        <a href="pages/item.html" class="card">
-            <h2>Item</h2>
-            <p>Manage products and stock</p>
+        <!-- Item Card -->
+        <a href="pages/item.html" class="card" data-card="2">
+            <div class="card-glow"></div>
+            <div class="card-icon item-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 16V8C20.9996 7.64927 20.9071 7.30481 20.7315 7.00116C20.556 6.69751 20.3037 6.44536 20 6.27L13 2.27C12.696 2.09446 12.3511 2.00205 12 2.00205C11.6489 2.00205 11.304 2.09446 11 2.27L4 6.27C3.69626 6.44536 3.44398 6.69751 3.26846 7.00116C3.09294 7.30481 3.00036 7.64927 3 8V16C3.00036 16.3507 3.09294 16.6952 3.26846 16.9988C3.44398 17.3025 3.69626 17.5546 4 17.73L11 21.73C11.304 21.9055 11.6489 21.9979 12 21.9979C12.3511 21.9979 12.696 21.9055 13 21.73L20 17.73C20.3037 17.5546 20.556 17.3025 20.7315 16.9988C20.9071 16.6952 20.9996 16.3507 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.27002 6.96L12 12.01L20.73 6.96" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 22.08V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">Inventory</h2>
+                <p class="card-description">Track products, manage stock levels, and update pricing information</p>
+                <div class="card-stats">
+                    <div class="stat">
+                        <span class="stat-icon">📦</span>
+                        <span class="stat-label">Stock</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-arrow">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
         </a>
 
-        <a href="pages/place-order.html" class="card">
-            <h2>Orders</h2>
-            <p>Create and manage orders</p>
+        <!-- Orders Card -->
+        <a href="pages/place-order.html" class="card" data-card="3">
+            <div class="card-glow"></div>
+            <div class="card-icon order-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 11L12 14L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">Orders</h2>
+                <p class="card-description">Create new sales orders, process transactions, and view order history</p>
+                <div class="card-stats">
+                    <div class="stat">
+                        <span class="stat-icon">🛒</span>
+                        <span class="stat-label">Sales</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-arrow">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
         </a>
 
     </div>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">
+            <span>Built with</span>
+            <span class="heart">❤️</span>
+            <span>by Your Team</span>
+        </div>
+        <div class="footer-right">
+            <span class="version">v1.0.0</span>
+        </div>
+    </footer>
+
 </div>
 
+<!-- Cursor Trail -->
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<script src="js/index.js"></script>
 </body>
 </html>

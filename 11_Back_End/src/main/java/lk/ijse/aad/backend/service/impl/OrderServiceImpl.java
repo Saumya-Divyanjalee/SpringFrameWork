@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         // Step 2: Validate item exists and has enough stock
-        Item item = itemRepository.findById(orderDTO.getItemId())
+        Item item = itemRepository.findById(Integer.valueOf(orderDTO.getItemId()))
                 .orElseThrow(() -> new RuntimeException("Item not found: " + orderDTO.getItemId()));
 
         // Step 3: Check stock availability
@@ -89,13 +89,13 @@ public class OrderServiceImpl implements OrderService {
                 .orElseThrow(() -> new RuntimeException("Order not found: " + id));
 
         // Step 1: Restore original item stock
-        Item originalItem = itemRepository.findById(originalOrder.getItemId())
+        Item originalItem = itemRepository.findById(Integer.valueOf(originalOrder.getItemId()))
                 .orElseThrow(() -> new RuntimeException("Item not found: " + originalOrder.getItemId()));
         originalItem.setItemQuantity(originalItem.getItemQuantity() + originalOrder.getQuantity());
         itemRepository.save(originalItem);
 
         // Step 2: Validate new item stock
-        Item newItem = itemRepository.findById(orderDTO.getItemId())
+        Item newItem = itemRepository.findById(Integer.valueOf(orderDTO.getItemId()))
                 .orElseThrow(() -> new RuntimeException("Item not found: " + orderDTO.getItemId()));
 
         if (newItem.getItemQuantity() < orderDTO.getQuantity()) {
@@ -130,7 +130,7 @@ public class OrderServiceImpl implements OrderService {
                 .orElseThrow(() -> new RuntimeException("Order not found: " + id));
 
         // Restore item stock when order is deleted
-        Item item = itemRepository.findById(order.getItemId())
+        Item item = itemRepository.findById(Integer.valueOf(order.getItemId()))
                 .orElseThrow(() -> new RuntimeException("Item not found: " + order.getItemId()));
         item.setItemQuantity(item.getItemQuantity() + order.getQuantity());
         itemRepository.save(item);
