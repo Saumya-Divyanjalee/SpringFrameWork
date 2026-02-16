@@ -8,24 +8,24 @@ import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data // Using @Data simplifies things
+@Getter
+@Setter
+@ToString
 public class ItemDTO {
-    private Integer itemId; // Changed from String to Integer
+    private Integer itemId;  // Changed from String
 
     @NotBlank(message = "Item name is mandatory")
     private String itemName;
 
     @NotNull(message = "Item price is required")
     @Min(value = 0, message = "Price cannot be negative")
-    private double itemPrice;
+    private Double itemPrice;
 
     @NotNull(message = "Item quantity is required")
     @Min(value = 0, message = "Quantity cannot be negative")
-    private int itemQuantity;
+    private Integer itemQuantity;
 
-    @NotNull(message = "Item cost is required")
-    @Min(value = 0, message = "Cost cannot be negative")
-    private double itemCost;
+    private Double itemCost;  // Auto-calculated, no validation needed
 
     @Size(max = 255, message = "Description too long")
     private String itemDescription;

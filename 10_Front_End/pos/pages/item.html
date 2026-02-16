@@ -22,7 +22,8 @@
 
     <div class="mb-3">
       <label for="itemId" class="form-label">Item Id</label>
-      <input type="text" class="form-control" id="itemId" readonly placeholder="Auto Generated">
+      <input type="text" class="form-control" id="itemId" readonly>
+      <small class="text-muted">Auto-generated</small>
     </div>
 
     <div class="mb-3">
@@ -41,8 +42,9 @@
     </div>
 
     <div class="mb-3">
-      <label for="itemCost" class="form-label">Item Cost</label>
-      <input type="text" class="form-control" id="itemCost">
+      <label for="itemCost" class="form-label">Item Cost (Total)</label>
+      <input type="text" class="form-control" id="itemCost" readonly>
+      <small class="text-muted">Auto-calculated (Price × Quantity)</small>
     </div>
 
     <div class="mb-3">

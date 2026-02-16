@@ -20,7 +20,11 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void saveItem(ItemDTO itemDTO) {
-        itemRepository.save(modelMapper.map(itemDTO, Item.class));
+        // AUTO-CALCULATE COST
+        itemDTO.setItemCost(itemDTO.getItemPrice() * itemDTO.getItemQuantity());
+
+        Item item = modelMapper.map(itemDTO, Item.class);
+        itemRepository.save(item);
     }
 
     @Override
@@ -42,8 +46,13 @@ public class ItemServiceImpl implements ItemService {
         if (!itemRepository.existsById(id)) {
             throw new RuntimeException("Item not found with id: " + id);
         }
-        itemDTO.setItemId(Integer.valueOf(String.valueOf(id)));
-        itemRepository.save(modelMapper.map(itemDTO, Item.class));
+
+        // AUTO-CALCULATE COST
+        itemDTO.setItemCost(itemDTO.getItemPrice() * itemDTO.getItemQuantity());
+        itemDTO.setItemId(id);
+
+        Item item = modelMapper.map(itemDTO, Item.class);
+        itemRepository.save(item);
     }
 
     @Override

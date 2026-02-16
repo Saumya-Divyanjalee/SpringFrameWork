@@ -9,4 +9,5 @@ public interface ItemService {
     ItemDTO getItemById(Integer id);
     void updateItem(Integer id, ItemDTO itemDTO);
     void deleteItem(Integer id);
+    // Removed duplicate methods
 }

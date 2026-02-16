@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Integer> {
-    // Changed from String to Integer to match Item entity's ID type
+    // Changed from <Item, String> to <Item, Integer>
 }
