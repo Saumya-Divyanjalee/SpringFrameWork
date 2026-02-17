@@ -175,3 +175,64 @@ nav a.btn:hover {
     .page-title, h1 { font-size: 1.4rem; }
     .btn { font-size: 0.82rem; }
 }
+/* NAVBAR STYLING */
+nav {
+    display: flex;
+    gap: 10px;          /* Space between buttons */
+    flex-wrap: wrap;     /* Wrap on smaller screens */
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Common button style */
+nav .btn {
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 25px;   /* Rounded buttons */
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    font-size: 0.9rem;
+}
+
+/* Primary button style (Home) */
+nav .btn-outline-primary {
+    color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+nav .btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Secondary button style (Item) */
+nav .btn-outline-secondary {
+    color: #6c757d;
+    border-color: #6c757d;
+}
+
+nav .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Success button style (Order, Order History) */
+nav .btn-outline-success {
+    color: #198754;
+    border-color: #198754;
+}
+
+nav .btn-outline-success:hover {
+    background-color: #198754;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Active page button highlight */
+nav .btn.active, nav .btn.active:hover {
+    background-color: #0d6efd !important; /* Blue highlight */
+    color: #fff !important;
+    border-color: #0d6efd !important;
+}

@@ -1,116 +1,217 @@
+/* ===== Reset & Body ===== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
 
+/* ===== Top Navigation ===== */
+.topnav {
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    gap: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.topnav a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.topnav a:hover, .topnav a.active {
+    color: #0d6efd;
+}
+
+.topnav-brand {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+/* ===== Page Title ===== */
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ===== Stats Cards ===== */
 .stat-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    background-color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    border-top: 4px solid transparent;
-    transition: transform 0.2s, box-shadow 0.2s;
-    height: 100%;
-}
-
-.stat-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-}
-
-.stat-blue  { border-top-color: #0d6efd; }
-.stat-green { border-top-color: #198754; }
-.stat-orange{ border-top-color: #fd7e14; }
-.stat-purple{ border-top-color: #6f42c1; }
-
-.stat-icon {
-    font-size: 2rem;
-    margin-bottom: 8px;
+    align-items: start;
+    gap: 0.5rem;
 }
 
 .stat-value {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #1a1a2e;
-    line-height: 1.1;
-    margin-bottom: 4px;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
-
-.stat-blue .stat-value  { color: #0d6efd; }
-.stat-green .stat-value { color: #198754; }
-.stat-orange .stat-value{ color: #fd7e14; }
-.stat-purple .stat-value{ color: #6f42c1; }
 
 .stat-label {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    font-size: 0.875rem;
     color: #6c757d;
-    font-weight: 600;
 }
 
+.stat-blue { border-left: 4px solid #0d6efd; }
+.stat-green { border-left: 4px solid #198754; }
+.stat-orange { border-left: 4px solid #fd7e14; }
+.stat-purple { border-left: 4px solid #6f42c1; }
 
+/* ===== Filter Bar ===== */
 .filter-bar {
-    background: #fff;
-    border-radius: 10px;
-    padding: 18px 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    border: 1px solid #e9ecef;
+    background-color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
-
-.history-row {
-    cursor: default !important;
+.filter-bar .form-label {
+    margin-bottom: 0.25rem;
 }
 
-.history-row:hover {
-    background-color: #f8f9ff !important;
+/* ===== Table ===== */
+.table-card {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
-.total-cell {
-    font-weight: 700;
-    color: #198754;
-    font-size: 0.95rem;
+.table th, .table td {
+    vertical-align: middle !important;
 }
 
-.date-cell {
-    white-space: nowrap;
-    font-size: 0.82rem;
+.table-hover tbody tr:hover {
+    background-color: rgba(13,110,253,0.05);
 }
 
-.customer-badge {
-    background-color: #e8f4f8;
-    color: #0c7abf;
-    padding: 2px 10px;
-    border-radius: 20px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
+.table td, .table th {
+    padding: 0.75rem 0.75rem;
+    font-size: 0.875rem;
 }
 
-
-#pagination {
-    gap: 4px;
-    flex-wrap: wrap;
-}
-
-#pagination .btn {
-    min-width: 38px;
-    padding: 4px 10px;
-    font-size: 0.82rem;
-}
-
-
-.spinner-border-sm {
+.spinner-border {
     width: 1rem;
     height: 1rem;
 }
 
+/* ===== Pagination ===== */
+#pagination button {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
 
+#pagination button:hover, #pagination button.active {
+    background-color: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
-    .stat-value { font-size: 1.2rem; }
-    .stat-icon  { font-size: 1.5rem; }
-    .filter-bar .row .col-md-4,
-    .filter-bar .row .col-md-3,
-    .filter-bar .row .col-md-2 { margin-bottom: 8px; }
+    .filter-bar .row {
+        flex-direction: column;
+    }
+    .filter-bar .col-md-4, .filter-bar .col-md-3, .filter-bar .col-md-2 {
+        flex: 1 1 100%;
+    }
+}
+
+/* ===== Alert Box ===== */
+#alertBox {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: 1050;
+}
+
+/* ===== Small UI Tweaks ===== */
+input.form-control, select.form-select {
+    border-radius: 0.25rem;
+}
+
+button.btn {
+    border-radius: 0.25rem;
+}
+/* NAVBAR STYLING */
+nav {
+    display: flex;
+    gap: 10px;          /* Space between buttons */
+    flex-wrap: wrap;     /* Wrap on smaller screens */
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Common button style */
+nav .btn {
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 25px;   /* Rounded buttons */
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    font-size: 0.9rem;
+}
+
+/* Primary button style (Home) */
+nav .btn-outline-primary {
+    color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+nav .btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Secondary button style (Item) */
+nav .btn-outline-secondary {
+    color: #6c757d;
+    border-color: #6c757d;
+}
+
+nav .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Success button style (Order, Order History) */
+nav .btn-outline-success {
+    color: #198754;
+    border-color: #198754;
+}
+
+nav .btn-outline-success:hover {
+    background-color: #198754;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Active page button highlight */
+nav .btn.active, nav .btn.active:hover {
+    background-color: #0d6efd !important; /* Blue highlight */
+    color: #fff !important;
+    border-color: #0d6efd !important;
 }
