@@ -34,6 +34,7 @@ public class GlobalExceptionHandler {
                 new APIResponse<>(HttpStatus.BAD_REQUEST.value(), "Validation Failed", errors),
                 HttpStatus.BAD_REQUEST
         );
+
     }
 
     // Catch-all for unexpected errors — do NOT expose raw stack traces in production
