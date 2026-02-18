@@ -19,10 +19,9 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    // POST - Save new order (ID is auto-generated, never from client)
+    // POST - Save new order (ID is auto-generated)
     @PostMapping
-    public ResponseEntity<APIResponse<Void>> saveOrder(
-            @Valid @RequestBody OrderDTO orderDTO) {
+    public ResponseEntity<APIResponse<Void>> saveOrder(@Valid @RequestBody OrderDTO orderDTO) {
         orderDTO.setOrderId(null); // Force null so DB generates it
         orderService.saveOrder(orderDTO);
         return ResponseEntity.status(HttpStatus.CREATED)

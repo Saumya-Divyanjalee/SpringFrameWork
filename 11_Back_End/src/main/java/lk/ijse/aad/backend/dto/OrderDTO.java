@@ -24,13 +24,13 @@ public class OrderDTO {
     private String itemId;
 
     // Service always overwrites this with the real DB item name
-    // But @NotBlank would cause 400 if frontend sends empty string — use nullable instead
+    // But @NotBlank would cause 400 if frontend sends empty string — use nullable instead (400-Bad Request)
     private String itemName;
 
     @Min(value = 1, message = "Quantity must be at least 1")
     private int quantity;
 
-    // FIX: @Min only works on int/long, NOT on double → use @DecimalMin for double
+    //@Min only works on int/long, NOT on double → use @DecimalMin for double
     @DecimalMin(value = "0.01", message = "Price must be greater than 0")
     private double price;
 
