@@ -25,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
     private final CustomerRepository customerRepository;
     private final ModelMapper modelMapper;
 
-    // ── FIX: customerId in OrderDTO is String, but Customer entity uses Integer PK
+    //  customerId in OrderDTO is String, but Customer entity uses Integer PK
     //         Parse it safely before calling existsById
     private Integer parseIntId(String id, String label) {
         try {
@@ -35,16 +35,14 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    // ── Item lookup helper ────────────────────────────────────────────────────
+    //  Item lookup helper
     private Item findItem(String itemId) {
         Integer id = parseIntId(itemId, "Item ID");
         return itemRepository.findById(id)
                 .orElseThrow(() -> new CustomException("Item not found with ID: " + itemId));
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  SAVE ORDER
-    // ─────────────────────────────────────────────────────────────────────────
+     //  SAVE ORDER
     @Transactional
     @Override
     public void saveOrder(OrderDTO orderDTO) {
@@ -85,10 +83,8 @@ public class OrderServiceImpl implements OrderService {
         itemRepository.save(item);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  GET ALL ORDERS
-    // ─────────────────────────────────────────────────────────────────────────
-    @Override
+     //  GET ALL ORDERS
+     @Override
     public List<OrderDTO> getAllOrders() {
         return orderRepository.findAll()
                 .stream()
@@ -96,20 +92,16 @@ public class OrderServiceImpl implements OrderService {
                 .collect(Collectors.toList());
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  GET ORDER BY ID
-    // ─────────────────────────────────────────────────────────────────────────
-    @Override
+     //  GET ORDER BY ID
+     @Override
     public OrderDTO getOrderById(Integer id) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new CustomException("Order not found with ID: " + id));
         return modelMapper.map(order, OrderDTO.class);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  UPDATE ORDER
-    // ─────────────────────────────────────────────────────────────────────────
-    @Transactional
+     //  UPDATE ORDER
+     @Transactional
     @Override
     public void updateOrder(Integer id, OrderDTO orderDTO) {
 
@@ -148,9 +140,8 @@ public class OrderServiceImpl implements OrderService {
         itemRepository.save(newItem);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  DELETE ORDER
-    // ─────────────────────────────────────────────────────────────────────────
+     //  DELETE ORDER
+
     @Transactional
     @Override
     public void deleteOrder(Integer id) {
@@ -165,10 +156,9 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.deleteById(id);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
+
     //  GET ORDERS BY CUSTOMER
-    // ─────────────────────────────────────────────────────────────────────────
-    @Override
+     @Override
     public List<OrderDTO> getOrdersByCustomer(String customerId) {
         return orderRepository.findOrderHistoryByCustomer(customerId)
                 .stream()
@@ -176,10 +166,8 @@ public class OrderServiceImpl implements OrderService {
                 .collect(Collectors.toList());
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  GET ORDER HISTORY (newest first)
-    // ─────────────────────────────────────────────────────────────────────────
-    @Override
+     //  GET ORDER HISTORY (newest first)
+     @Override
     public List<OrderDTO> getOrderHistory() {
         return orderRepository.findAllByOrderByOrderDateDesc()
                 .stream()

@@ -29,3 +29,10 @@ public class Customer {
     @Column(name = "c_phone")
     private String cPhone;
 }
+//        | Strategy | How ID is generated          | Use case            |
+//        | -------- | ---------------------------- | ------------------- |
+//        | AUTO     | JPA decides based on DB      | Simple apps         |
+//        | IDENTITY | DB auto-increment on insert  | MySQL, easy         |
+//        | SEQUENCE | DB sequence object           | PostgreSQL, Oracle  |
+//        | TABLE    | Special table stores last ID | DB-independent      |
+//        | UUID     | Random unique string         | Distributed systems |
