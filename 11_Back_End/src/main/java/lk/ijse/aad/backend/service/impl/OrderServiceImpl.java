@@ -27,6 +27,7 @@ public class OrderServiceImpl implements OrderService {
 
     //  customerId in OrderDTO is String, but Customer entity uses Integer PK
     //         Parse it safely before calling existsById
+    //Safely convert String ID to Integer.
     private Integer parseIntId(String id, String label) {
         try {
             return Integer.valueOf(id.trim());
@@ -35,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    //  Item lookup helper
+    //  Find item from database or throw exception if not found.
     private Item findItem(String itemId) {
         Integer id = parseIntId(itemId, "Item ID");
         return itemRepository.findById(id)
@@ -56,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
         // 2. Validate item exists and get live data from DB
         Item item = findItem(orderDTO.getItemId());
 
-        // 3. Check stock
+        // 3. Check stock-Make sure we have enough stock.
         if (item.getItemQuantity() < orderDTO.getQuantity()) {
             throw new CustomException(
                     "Insufficient stock! Available: " + item.getItemQuantity()
