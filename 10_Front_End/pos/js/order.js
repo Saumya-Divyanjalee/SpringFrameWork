@@ -7,7 +7,7 @@ const BASE_URL = "http://localhost:8080/api/v1";
     function showSpinner() { $('#loadingOverlay').addClass('show'); }
     function hideSpinner() { $('#loadingOverlay').removeClass('show'); }
 
-    // ── Alert helper ─────────────────────────────────────────────────────────
+    //   Alert helper
     function showAlert(type, message) {
     const icon = type === 'success' ? 'fa-check-circle'
     : type === 'warning' ? 'fa-exclamation-triangle'
@@ -20,8 +20,8 @@ const BASE_URL = "http://localhost:8080/api/v1";
     setTimeout(() => $('#alertBox .alert').fadeOut(400, function(){ $(this).remove(); }), 4500);
 }
 
-    // ── Load Customers ────────────────────────────────────────────────────────
-    // FIX #1: CustomerDTO fields are cId (Integer) and cName — NOT id/name
+    // Load Customers
+
     function loadCustomers() {
     $.ajax({
         url: BASE_URL + "/customer",
@@ -38,7 +38,7 @@ const BASE_URL = "http://localhost:8080/api/v1";
             }
 
             customers.forEach(function(c) {
-                // FIX: use c.cId and c.cName (matches CustomerDTO)
+
                 $sel.append(
                     $('<option>').val(c.cId).text(c.cId + ' — ' + c.cName)
                 );
@@ -51,8 +51,8 @@ const BASE_URL = "http://localhost:8080/api/v1";
     });
 }
 
-    // ── Load Items ────────────────────────────────────────────────────────────
-    // FIX #2: ItemDTO field is itemPrice (not price) and itemQuantity
+    //  Load Items
+
     function loadItems() {
     $.ajax({
         url: BASE_URL + "/item",
@@ -70,11 +70,11 @@ const BASE_URL = "http://localhost:8080/api/v1";
             }
 
             items.forEach(function(item) {
-                // FIX: store itemPrice (not price) from ItemDTO
+
                 itemMap[String(item.itemId)] = {
                     itemName:     item.itemName,
                     itemQuantity: item.itemQuantity,
-                    itemPrice:    item.itemPrice   // ← FIXED: was item.price (undefined)
+                    itemPrice:    item.itemPrice
                 };
                 $sel.append(
                     $('<option>')
@@ -89,7 +89,7 @@ const BASE_URL = "http://localhost:8080/api/v1";
     });
 }
 
-    // ── Item dropdown change → auto-fill name, price, stock ──────────────────
+    //  Item dropdown change → auto-fill name, price, stock
     $(document).on('change', '#itemId', function() {
     const key = String($(this).val());
     if (key && itemMap[key]) {
@@ -116,7 +116,7 @@ const BASE_URL = "http://localhost:8080/api/v1";
 }
 });
 
-    // ── Auto-calculate total ──────────────────────────────────────────────────
+    //  Auto-calculate total
     function recalcTotal() {
     const qty   = parseInt($('#quantity').val())   || 0;
     const price = parseFloat($('#price').val())    || 0;
@@ -131,7 +131,7 @@ const BASE_URL = "http://localhost:8080/api/v1";
     recalcTotal();
 });
 
-    // ── SAVE ORDER ────────────────────────────────────────────────────────────
+    // SAVE ORDER
     function saveOrder() {
     const customerId = String($('#customerId').val()).trim();
     const itemId     = String($('#itemId').val()).trim();
@@ -191,7 +191,7 @@ const BASE_URL = "http://localhost:8080/api/v1";
 });
 }
 
-    // ── UPDATE ORDER ──────────────────────────────────────────────────────────
+    //  UPDATE ORDER
     function updateOrder() {
     const orderId    = parseInt($('#orderId').val());
     const customerId = String($('#customerId').val()).trim();
@@ -227,7 +227,7 @@ const BASE_URL = "http://localhost:8080/api/v1";
 });
 }
 
-    // ── DELETE ORDER ──────────────────────────────────────────────────────────
+    //  DELETE ORDER
     function deleteOrder() {
     const orderId = parseInt($('#orderId').val());
     if (!orderId) { showAlert('warning', 'Select an order row first!'); return; }
@@ -252,13 +252,13 @@ const BASE_URL = "http://localhost:8080/api/v1";
 });
 }
 
-    // ── LOAD ALL ORDERS ───────────────────────────────────────────────────────
+    //  LOAD ALL ORDERS
     function loadOrders() {
     $.ajax({
         url: BASE_URL + "/order",
         method: "GET",
         success: function(res) {
-            // FIX #4: response is APIResponse → unwrap .data
+
             const orders = res.data;
             const $tbody = $('#orderTableBody');
             $tbody.empty();
@@ -294,7 +294,7 @@ const BASE_URL = "http://localhost:8080/api/v1";
     });
 }
 
-    // ── Populate form from clicked row ────────────────────────────────────────
+    //  Populate form from clicked row
     function populateForm(orderId, customerId, itemId, itemName, quantity, price, totalPrice) {
     $('#orderId').val(orderId);
     $('#customerId').val(String(customerId));
@@ -309,7 +309,7 @@ const BASE_URL = "http://localhost:8080/api/v1";
 }, 60);
 }
 
-    // ── Reset form ────────────────────────────────────────────────────────────
+    // Reset form
     function resetForm() {
     $('#orderForm')[0].reset();
     $('#orderId, #itemName').val('');
@@ -318,7 +318,7 @@ const BASE_URL = "http://localhost:8080/api/v1";
     selectedItemStock = 0;
 }
 
-    // ── XSS guard ─────────────────────────────────────────────────────────────
+
     function escHtml(str) {
     if (str == null) return '';
     return String(str)
@@ -326,7 +326,7 @@ const BASE_URL = "http://localhost:8080/api/v1";
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-    // ── Init ──────────────────────────────────────────────────────────────────
+
     $(document).ready(function() {
     loadCustomers();
     loadItems();

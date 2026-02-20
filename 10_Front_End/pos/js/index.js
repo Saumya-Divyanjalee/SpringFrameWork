@@ -1,4 +1,4 @@
-// ===== Live Clock =====
+//   Live Clock
 function updateClock() {
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, '0');
@@ -9,7 +9,7 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// ===== Optional: Slight hover movement on cards (subtle effect) =====
+//   Optional: Slight hover movement on cards (subtle effect)
 document.querySelectorAll('.nav-card').forEach(card => {
     card.addEventListener('mousemove', e => {
         const rect = card.getBoundingClientRect();

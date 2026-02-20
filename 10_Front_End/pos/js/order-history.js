@@ -13,7 +13,7 @@ let allOrders      = [];   // full list from server
 let filteredOrders = [];   // after search / filter
 let currentPage    = 1;
 
-// ─── LOAD HISTORY ────────────────────────────
+//  LOAD HISTORY
 function loadHistory() {
     showTableLoading();
 
@@ -21,8 +21,7 @@ function loadHistory() {
         url: HISTORY_BASE + "/order/history",
         method: "GET",
         success: function (res) {
-            // FIX #1: controller returns APIResponse { status, message, data:[...] }
-            //         so we must unwrap .data — not use res directly
+             //         so we must unwrap .data — not use res directly
             var orders = res.data !== undefined ? res.data : res;
 
             allOrders      = orders || [];
@@ -44,7 +43,7 @@ function loadHistory() {
     });
 }
 
-// ─── LOADING STATE ───────────────────────────
+// LOADING STATE
 function showTableLoading() {
     $('#historyTableBody').html(
         '<tr><td colspan="10" class="text-center text-muted py-4">' +
@@ -53,7 +52,7 @@ function showTableLoading() {
     );
 }
 
-// ─── UPDATE STATS CARDS ──────────────────────
+//  UPDATE STATS CARDS
 function updateStats(orders) {
     var totalOrders     = orders.length;
     var totalRevenue    = orders.reduce(function(sum, o) { return sum + (o.totalPrice || 0); }, 0);
@@ -70,7 +69,7 @@ function updateStats(orders) {
     }));
 }
 
-// ─── RENDER TABLE ────────────────────────────
+//  RENDER TABLE
 function renderTable() {
     var tbody = $('#historyTableBody');
     tbody.empty();
@@ -93,8 +92,7 @@ function renderTable() {
     pageOrders.forEach(function(order, index) {
         var rowNum  = start + index + 1;
 
-        // FIX #2: orderId is now Integer from backend (not String)
-        //         Use String() conversion before any string operations
+         //         Use String() conversion before any string operations
         var orderIdStr   = String(order.orderId   || '');
         var customerStr  = String(order.customerId || '');
         var itemIdStr    = String(order.itemId     || '');
@@ -133,7 +131,7 @@ function renderTable() {
     renderPagination(totalPages);
 }
 
-// ─── PAGINATION ──────────────────────────────
+//  PAGINATION
 function renderPagination(totalPages) {
     var pg = $('#pagination');
     pg.empty();
@@ -165,7 +163,7 @@ function changePage(page) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ─── SEARCH ──────────────────────────────────
+// SEARCH
 function applySearch() {
     var term = $('#searchInput').val().toLowerCase().trim();
 
@@ -173,8 +171,7 @@ function applySearch() {
         filteredOrders = allOrders;
     } else {
         filteredOrders = allOrders.filter(function(o) {
-            // FIX #3: orderId is Integer — must call String() first, not .toLowerCase() directly
-            return String(o.orderId   || '').toLowerCase().includes(term) ||
+             return String(o.orderId   || '').toLowerCase().includes(term) ||
                 String(o.customerId|| '').toLowerCase().includes(term) ||
                 String(o.itemId    || '').toLowerCase().includes(term) ||
                 (o.itemName        || '').toLowerCase().includes(term);
@@ -186,7 +183,7 @@ function applySearch() {
     renderTable();
 }
 
-// ─── FILTER BY CUSTOMER ──────────────────────
+// FILTER BY CUSTOMER
 function filterByCustomer() {
     var customerId = $('#customerFilter').val().trim();
 
@@ -199,7 +196,7 @@ function filterByCustomer() {
         url: HISTORY_BASE + "/order/customer/" + customerId,
         method: "GET",
         success: function(res) {
-            // FIX #4: also wrapped in APIResponse
+
             var orders = res.data !== undefined ? res.data : res;
             filteredOrders = orders || [];
             currentPage    = 1;
@@ -219,7 +216,7 @@ function filterByCustomer() {
     });
 }
 
-// ─── SORT ─────────────────────────────────────
+//  SORT
 function sortOrders() {
     var sortVal = $('#sortSelect').val();
 
@@ -235,7 +232,7 @@ function sortOrders() {
     renderTable();
 }
 
-// ─── CLEAR FILTERS ────────────────────────────
+//  CLEAR FILTERS
 function clearFilters() {
     $('#searchInput').val('');
     $('#customerFilter').val('');
@@ -246,7 +243,7 @@ function clearFilters() {
     renderTable();
 }
 
-// ─── TOAST NOTIFICATION ───────────────────────
+//  TOAST NOTIFICATION
 function showToast(type, message) {
     // Remove any existing toast
     $('#liveToast').remove();
@@ -267,7 +264,7 @@ function showToast(type, message) {
     }, 3500);
 }
 
-// ─── XSS GUARD ────────────────────────────────
+
 function escHtml(str) {
     if (str == null) return '';
     return String(str)
@@ -277,7 +274,7 @@ function escHtml(str) {
         .replace(/"/g, '&quot;');
 }
 
-// ─── INIT ─────────────────────────────────────
+//  INIT
 $(document).ready(function() {
     loadHistory();
 
